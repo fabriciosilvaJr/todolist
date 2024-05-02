@@ -1,18 +1,25 @@
 # todolist
 
-## Project setup
-```
-npm install
-```
+## Instalação
+1. Clone o repositório do GitHub:
 
-### Compiles and hot-reloads for development
+   ```bash
+   git clone https://github.com/fabriciosilvaJr/todolist.git
+   
+2. Navegue até o diretório do projeto:
+    `cd todolist`
+
+
+3. Instale as dependências do Composer:
+   `npm install`
+
+
+### Executando o Aplicativo
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+
 ```
 
 ### Customize configuration
