@@ -67,9 +67,7 @@ export default {
     saveTask(){
 
       if(this.methodSave === "update"){
-        let tasks = JSON.parse(localStorage.getItem("tasks"));
-        tasks[this.$route.params.index] = this.form;
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        this.form.save();
         this.showToast("success","Sucesso!", "Tarefa atualizada com sucesso")
         this.$router.push({name:'list'});
         return;
