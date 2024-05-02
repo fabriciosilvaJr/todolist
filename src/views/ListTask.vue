@@ -4,7 +4,7 @@
       <b-card :title="task.title" class="mb-2">
         <b-card-text>{{task.description}}</b-card-text>
         <b-button variant="outline-secondary" class="mr-2" @click="edit(task.id)">Editar</b-button>
-        <b-button variant="outline-danger" class="mr-2" @click="remove(task,index)">Excluir</b-button>
+        <b-button variant="outline-danger" class="mr-2" @click="remove(task.id)">Excluir</b-button>
       </b-card>
     </div>
   
@@ -43,9 +43,8 @@ export default {
     edit(taskId){
       this.$router.push({name:"form",params: {taskId}});
     },
-    remove(task, index){
-      this.taskSelected = task;
-       this.taskSelected.index = index;
+   async remove(taskId){
+      this.taskSelected = await TasksModel.find(taskId);
        this.$refs.modalRemove.show();
 
     },
@@ -53,9 +52,9 @@ export default {
        this.$refs.modalRemove.hide();
 
     },
-    confirmRemoveTask(){
-      this.tasks.splice(this.taskSelected.index,1);
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+   async confirmRemoveTask(){
+      this.taskSelected.delete();
+      this.tasks = this.tasks.filter(task => task.id !== this.taskSelected.id);
       this.hideModal();
     }
   }

@@ -58,7 +58,7 @@ export default {
  async created(){
     if(this.$route.params.taskId){
       this.methodSave = "update";
-      this.form = await TasksModel.find(this.$route.params.taskId)
+      this.form = await TasksModel.find(this.$route.params.taskId);
   
     }
 
