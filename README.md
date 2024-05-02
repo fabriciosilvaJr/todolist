@@ -1,21 +1,19 @@
 # todolist
 
-## Instalação
-1. Clone o repositório do GitHub:
+## Project setup
+```
+npm install
+```
 
-   ```bash
-   git clone https://github.com/fabriciosilvaJr/todolist.git
-   
-2. Navegue até o diretório do projeto:
-    `cd todolist`
-
-
-3. Instale as dependências do Composer:
-   `npm install`
-
-
-### Executando o Aplicativo
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
