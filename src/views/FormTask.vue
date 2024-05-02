@@ -1,16 +1,6 @@
 <template>
   <div class="container mt-2">
     <b-form>
-      <b-form-group label="Usuário" label-for="user_id">
-        <b-form-input
-          id="user_id"
-          v-model="form.user_id"
-          type="text"
-          required
-          autocomplete="off"
-        >
-        </b-form-input>
-      </b-form-group>
       <b-form-group label="Titulo" label-for="title">
         <b-form-input
           id="title"
@@ -52,7 +42,7 @@ export default {
       form: {
         title: "",
         description: "",
-        user_id: "",
+        user_id: localStorage.getItem('user_id'),
       },
       methodSave: "new",
     };

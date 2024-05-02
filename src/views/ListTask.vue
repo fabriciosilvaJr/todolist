@@ -47,25 +47,26 @@ export default {
   },
 
   async created() {
-       await this.getAll();
-
+    await this.getAll();
   },
 
   methods: {
     async getAll() {
       try {
-        this.tasks = await TaskService.getAllTasks();
+        const user_id = localStorage.getItem("user_id");
+        const allTasks = await TaskService.getAllTasks();
+        this.tasks = allTasks.filter((task) => task.user_id == user_id);
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        console.error(error);
       }
     },
 
-      async edit(taskId) {
+    async edit(taskId) {
       try {
         this.taskSelected = await TaskService.getByIdTask(taskId);
         this.$router.push({ name: "form", params: { taskId } });
       } catch (error) {
-        console.error("Error fetching task:", error);
+        console.error(error);
       }
     },
     async remove(taskId) {
@@ -75,7 +76,7 @@ export default {
     hideModal() {
       this.$refs.modalRemove.hide();
     },
-   
+
     async confirmRemoveTask() {
       try {
         await TaskService.deleteTask(this.taskSelected.id);

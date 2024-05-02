@@ -11,6 +11,16 @@
           <b-nav-item to="/form">Nova</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
+
+      <b-navbar-nav right >
+        <b-nav-item  
+        @click="logout()"
+        >
+         Sair
+        </b-nav-item>
+      </b-navbar-nav>
+
+       
     </b-navbar>
 
     <router-view />
@@ -23,6 +33,13 @@ export default {
   computed:{
     notIsLoginPage(){
       return this.$route.name != "login" && this.$route.name != "register";
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.removeItem('token');
+      localStorage.removeItem('user_id');
+      this.$router.push({name:'login'});
     }
   }
 

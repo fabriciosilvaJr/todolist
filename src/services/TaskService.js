@@ -83,7 +83,7 @@ export default {
                   throw error;
                 });
     } else {
-      return Promise.reject(new Error("Token não encontrado"));
+      return Promise.reject(new Error("Token não encontrada"));
     }
   },
   

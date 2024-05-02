@@ -67,6 +67,7 @@ export default {
     .then(response => {
   
       localStorage.setItem('token', response.token);
+      localStorage.setItem('user_id', response.id);
       this.showToast("success", "Sucesso!", "Login realizado com sucesso");
       this.$router.push({ name: "list" });
     })
