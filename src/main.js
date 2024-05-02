@@ -9,6 +9,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 
+import axios from 'axios';
+import {Model} from 'vue-api-query';
+Model.$http = axios;
+
 Vue.config.productionTip = false
 
 new Vue({
