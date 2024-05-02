@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark" variant="info" v-if="notIsLoginPage">
       <b-navbar-brand href="#">Todo List</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -16,6 +16,19 @@
     <router-view />
   </div>
 </template>
+
+<script lang="ts">
+
+export default {
+  computed:{
+    notIsLoginPage(){
+      return this.$route.name != "login";
+    }
+  }
+
+}
+</script>
+
 
 <style>
 </style>

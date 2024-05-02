@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListTask from '../views/ListTask.vue'
 import FormTask from '../views/FormTask.vue'
+import Login from '../views/Login.vue'
+
 
 
 Vue.use(VueRouter)
@@ -16,6 +18,11 @@ const routes = [
     path: '/form',
     name: 'form',
     component: FormTask
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   },
 
 ]
