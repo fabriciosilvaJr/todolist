@@ -4,6 +4,8 @@ import ListTask from '../views/ListTask.vue'
 import FormTask from '../views/FormTask.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import authGuard from './authGuard'
+
 
 
 
@@ -14,22 +16,30 @@ const routes = [
   {
     path: '/',
     name: 'list',
-    component: ListTask
+    component: ListTask,
+    meta: { requiresAuth: true },
+
+
   },
   {
     path: '/form',
     name: 'form',
-    component: FormTask
+    component: FormTask,
+    meta: { requiresAuth: true },
+
+
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    
   },
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    
   },
 
 ]
@@ -39,5 +49,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+authGuard(router);
+
 
 export default router
