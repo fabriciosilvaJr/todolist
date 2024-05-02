@@ -29,21 +29,29 @@
           <b-button type="button" variant="primary" block @click="login">
             Entrar
           </b-button>
-          <hr>
-          <b-button type="button" variant="outline-secondary" block @click="register">
+          <hr />
+          <b-button
+            type="button"
+            variant="outline-secondary"
+            block
+            @click="register"
+          >
             Cadastrar
           </b-button>
         </b-form>
       </div>
     </b-col>
-    <b-col sm="7" class=" d-flex justify-content-center align-items-center">
-      <img src="../assets/images/login.svg" class="img-login">
-
+    <b-col sm="7" class="d-flex justify-content-center align-items-center">
+      <img src="../assets/images/login.svg" class="img-login" />
     </b-col>
   </b-row>
 </template>
 <script>
+import ToastMixin from "@/mixins/toastMixin";
+import LoginUser from "@/models/LoginUserModel";
 export default {
+  mixins: [ToastMixin],
+
   data() {
     return {
       form: {
@@ -52,10 +60,25 @@ export default {
       },
     };
   },
-  methods(){
-    login(),
-    register()
-  }
+  methods: {
+    login() {
+    const user = new LoginUser(this.form);
+    user.save()
+    .then(response => {
+      localStorage.setItem('token', response.token);
+      this.showToast("success", "Sucesso!", "Login realizado com sucesso");
+      this.$router.push({ name: "list" });
+    })
+    .catch(error => {
+      console.error('Erro ao realizar o login', error);
+      this.showToast("error", "Erro!", "Erro ao realizar o login");
+    });
+
+    },
+    register() {
+      this.$router.push({ name: "register" });
+    },
+  },
 };
 </script>
 
@@ -75,10 +98,10 @@ export default {
 .left-login {
   background-color: #f2f2f2;
 }
-.title-login{
+.title-login {
   font-weight: bold;
 }
-.img-login{
+.img-login {
   width: 600px;
   height: 600px;
 }
