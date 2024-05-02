@@ -1,6 +1,16 @@
 <template>
   <div class="container mt-2">
     <b-form>
+        <b-form-group label="Usuário" label-for="user_id">
+        <b-form-input
+          id="user_id"
+          v-model="form.user_id"
+          type="text"
+          required
+          autocomplete="off"
+        >
+        </b-form-input>
+      </b-form-group>
       <b-form-group label="Titulo" label-for="title">
         <b-form-input
           id="title"
@@ -30,6 +40,8 @@
 
 <script>
 import ToastMixin from "@/mixins/toastMixin";
+import TasksModel from "@/models/TasksModel";
+
 export default {
   name: "FormTask",
   mixins: [ToastMixin],
@@ -37,16 +49,17 @@ export default {
     return{
       form:{
         title: "",
-        description: ""
+        description: "",
+        user_id: ""
       },
       methodSave: "new"
     }
   },
-  created(){
-    if(this.$route.params.index === 0 || this.$route.params.index !== undefined){
+ async created(){
+    if(this.$route.params.taskId){
       this.methodSave = "update";
-      let tasks = JSON.parse(localStorage.getItem("tasks"));
-      this.form = tasks[this.$route.params.index];
+      this.form = await TasksModel.find(this.$route.params.taskId)
+  
     }
 
   },
@@ -63,9 +76,9 @@ export default {
 
       }
 
-      let tasks = (localStorage.getItem('tasks')) ? JSON.parse(localStorage.getItem('tasks')) : [];
-      tasks.push(this.form);
-      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      const task = new TasksModel(this.form);
+      task.save();
       this.showToast("success","Sucesso!", "Tarefa criada com sucesso")
       this.$router.push({name:'list'});
     }
