@@ -23,9 +23,12 @@
         >
         </b-form-textarea>
       </b-form-group>
-      <b-button type="submit" @click="saveTask" variant="outline-primary"
+    
+      <b-button type="submit" @click="saveTask"  class="mr-2" variant="outline-primary"
         >Salvar</b-button
       >
+       <b-button variant="outline-secondary" @click="cancel"
+        >Cancelar</b-button>
     </b-form>
   </div>
 </template>
@@ -42,7 +45,7 @@ export default {
       form: {
         title: "",
         description: "",
-        user_id: localStorage.getItem('user_id'),
+        user_id: localStorage.getItem("user_id"),
       },
       methodSave: "new",
     };
@@ -63,11 +66,13 @@ export default {
         return;
       }
 
-  
       TaskService.createTask(this.form);
       this.showToast("success", "Sucesso!", "Tarefa criada com sucesso");
       this.$router.push({ name: "list" });
     },
+    cancel(){
+      this.$router.push({ name: "list" });
+    }
   },
 };
 </script>
